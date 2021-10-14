@@ -1,16 +1,34 @@
-// import { Component } from 'react';
-// import Form from '../Form/Form';
-// import FilterSearch from '../FilterSearch/FilterSearch';
-// import ContactList from '../ContactList/ContactList';
+import { Component } from 'react';
 import Container from '../Container/Container';
-// import data from '../../contacts.json';
+import Modal from '../Modal/Modal';
 
-function App(){
-  return (
-    <div>goit-react-hw-03-image-finder
-    <Container/>
-    </div>
+
+class App extends Component {
+  state = {
+    showModal: false,
+  }
+
+  toggleModal = () => {
+    this.setState(({showModal}) => ({
+      showModal: !showModal,
+    }))
+  }
+
+  render() {
+    const { showModal } = this.state;
+      return (
+        <Container>
+          <button type="button" onClick={this.toggleModal}>Open Modal</button>
+          {showModal && (
+            <Modal onClose={this.toggleModal}>
+              <>
+                <button type="button" onClick={this.toggleModal}>Close Modal</button>
+              </>
+            </Modal>)
+  }
+    </Container>
   )
+  }
 }
 
 export default App;
