@@ -86,6 +86,7 @@ toggleModal = () => {
           {loading && <PendingView/>}
           {pictures.length !== 0 ? (<ImageGallery pictures={pictures} onModalOpen={this.handleModalClick}/>)
           : (searchQuery !== '' && <ErrorView/>)}
+          {loading && !showModal && <PendingView/>}
           {!loading && pictures[0] && <Button onClick={this.handleLoadMoreClick}/>}
           {showModal && (
             <Modal onClose={this.toggleModal}>
