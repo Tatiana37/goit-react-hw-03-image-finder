@@ -17,7 +17,10 @@ export default class Searchbar extends Component {
     handleSearchSubmit = e => {
     e.preventDefault();
     if(this.state.searchValue.trim() === ''){
-      toast.error('Please, enter the correct search query!')
+      toast.error('Please, enter the search query!', {
+        position: toast.POSITION.TOP_LEFT,
+        theme: "colored",
+      })
       return;
     }
     this.props.onSubmit(this.state.searchValue)

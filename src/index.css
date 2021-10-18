@@ -15,11 +15,10 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Georgia', 'Times New Roman', Times, serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(190, 210, 248);
 }
 
 code {
@@ -35,4 +34,10 @@ img {
 
 ul{
   list-style: none;
+}
+
+.error{
+  margin-left: auto;
+  margin-right: auto;
+  color: red;
 }

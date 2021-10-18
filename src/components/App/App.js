@@ -7,6 +7,8 @@ import Searchbar from '../SearchBar/SearchBar';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
+import ErrorView from '../ErrorView/ErrorView';
+import PendingView from '../PendingView/PendingView';
 
 
 class App extends Component {
@@ -16,6 +18,7 @@ class App extends Component {
     pictures: [],
     loading: false,
     showModal: false,
+    largePicture: {},
   }
   
   componentDidUpdate(prevProps, prevState) {
@@ -39,13 +42,6 @@ class App extends Component {
     });
   }
 
-
-
-  toggleModal = () => {
-    this.setState(({showModal}) => ({
-      showModal: !showModal,
-    }))
-  }
   
   handleFormSubmit = searchQuery => {
     this.setState({
@@ -69,22 +65,35 @@ handleLoadMoreClick =()=>{
   .finally(() => this.setState({loading: false }));
 }
 
+handleModalClick= largePicture =>{
+  this.setState({largePicture});
+  this.toggleModal();
+}
+
+toggleModal = () => {
+  this.setState(({showModal}) => ({
+    showModal: !showModal,
+  }))
+}
+
 
   render() {
-    const { loading, pictures, showModal } = this.state;
+    const { loading, searchQuery, pictures, largePicture, showModal } = this.state;
       return (
         <Container>
           <ToastContainer/>
           <Searchbar onSubmit={this.handleFormSubmit}/>
-          <ImageGallery pictures={pictures} />
+          {loading && <PendingView/>}
+          {pictures.length !== 0 ? (<ImageGallery pictures={pictures} onModalOpen={this.handleModalClick}/>)
+          : (searchQuery !== '' && <ErrorView/>)}
           {!loading && pictures[0] && <Button onClick={this.handleLoadMoreClick}/>}
-          
-          {/* <button type="button" onClick={this.toggleModal}>Open Modal</button> */}
           {showModal && (
             <Modal onClose={this.toggleModal}>
-              <>
-                <button type="button" onClick={this.toggleModal}>Close Modal</button>
-              </>
+              {loading && <PendingView/>}
+              <img 
+              src={largePicture.largeImageURL}
+              alt={largePicture.tags}
+              />
             </Modal>)
   }
     </Container>
